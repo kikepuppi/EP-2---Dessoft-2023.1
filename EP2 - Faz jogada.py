@@ -14,11 +14,13 @@ tabuleiro = [
 linha = 1
 coluna = 1
 def faz_jogada(tabuleiro, linha, coluna):
-    for i in tabuleiro:
-        print (i)
-       
-
-
+    if tabuleiro[linha][coluna] == 1:
+        tabuleiro[linha][coluna] = 'X'
+    else:
+        tabuleiro[linha][coluna] = '-'
+    return tabuleiro
+resultado = faz_jogada(tabuleiro, linha, coluna)
+print(resultado)
 
 
 
