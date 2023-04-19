@@ -16,10 +16,10 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
             listresult.append([linha,coluna+i])
     return listresult
 
-def preenche_frota(linha, coluna, orientacao, tamanho, nome_navio, frota):
+def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
     if nome_navio not in frota.keys():
-        frota[nome_navio] = define_posicoes(linha, coluna, orientacao, tamanho)
+        frota[nome_navio] = [define_posicoes(linha, coluna, orientacao, tamanho)]
     else:
-        frota[nome_navio] += define_posicoes(linha, coluna, orientacao, tamanho)
+        frota[nome_navio] += [define_posicoes(linha, coluna, orientacao, tamanho)]
     return frota
-print(preenche_frota(linha, coluna, orientacao, tamanho, nome_navio, frota))
+print(preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho))
