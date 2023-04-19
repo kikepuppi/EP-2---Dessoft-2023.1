@@ -31,9 +31,6 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
         for i in range (tamanho):
             listresult.append([linha,coluna+i])
     return listresult
-
-print(define_posicoes(linha, coluna, orientacao, tamanho))
-
 def posicao_valida(frota, linha, coluna, orientacao, tamanho):
     if frota == {}:
         return False
@@ -43,8 +40,10 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
                 for j in range (len(v[i])):
                     if v[i][j] in define_posicoes(linha, coluna, orientacao, tamanho):
                         return False
-        if valores[0] > 10 or valores[1] > 10:
-            return False
+    for valores in define_posicoes(linha, coluna, orientacao, tamanho):
+        for numeros in valores:
+            if valores[0] > 9 or valores[1] > 9:
+                return False
     return True
                     
 resultado = posicao_valida(frota, linha, coluna, orientacao, tamanho)
