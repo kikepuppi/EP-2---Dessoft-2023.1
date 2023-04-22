@@ -21,17 +21,12 @@ frota = {
 
 
 def posiciona_frota(frota):
-    l = [[],[],[],[],[],[],[],[],[],[]]
-    for i in range(10):
-        l[i] += [0 for x in range(10)]
-    for barco, cordenadas_geral in frota.items():
-        for cordenada_umbarco in cordenadas_geral:
-            for posicao in cordenada_umbarco:
-                for T in range(10):
-                    for j in range(10):
-                        if [T,j] == [posicao[0],posicao[1]]:
-                            l[T][j] = 1
-    return l
+    tabuleiro = [[0]*10 for i in range(10)]
+    for barco, posições in frota.items():
+        for posição in posições:
+            for linha, coluna in posição:
+                tabuleiro[linha][coluna] = 1
+    return tabuleiro 
 
 resultado = posiciona_frota(frota)
 print(resultado)
