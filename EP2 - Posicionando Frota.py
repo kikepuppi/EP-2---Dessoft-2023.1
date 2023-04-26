@@ -43,10 +43,9 @@ def faz_perguntas(navio, tamanho):
         print('Insira as informações referentes ao navio {0} que possui tamanho {1}'.format(navio,tamanho))
         linha = (input('Qual linha? '))
         coluna = (input('Qual coluna? '))
+        orientacao = '1'
         if navio != 'submarino':
             orientacao = (input('Vertical [1] ou Horizontal [2]? '))
-        else:
-            orientacao = 1
         if linha == '' or coluna == '':
             print('Esta posição não está válida!')
         elif posicao_valida(frota, int(linha), int(coluna), int(orientacao), tamanho) == False:
@@ -80,7 +79,6 @@ for i in range(4):
     tamanho = 1
     x = faz_perguntas(navio,tamanho)
     frota = preenche_frota(frota,navio,x[0],x[1],x[2],tamanho)
-
 print(frota)
 
 
