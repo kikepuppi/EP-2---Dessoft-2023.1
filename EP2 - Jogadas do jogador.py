@@ -54,13 +54,9 @@ def afundados(frota, tabuleiro):
     total_afundados = 0
     for navio, posições_gerais in frota.items():
         for posição_umbarco in posições_gerais: 
-            afundado = True
             for posição in posição_umbarco:
-                if tabuleiro[posição[0]][posição[1]] != 'X':
-                    afundado = False
-                    break
-            if afundado:
-                total_afundados += 1
+                if tabuleiro[posição[0]][posição[1]] == 'X':
+                  total_afundados += 1
     return total_afundados
 def posicao_valida(frota, linha, coluna, orientacao, tamanho):
     x = define_posicoes(linha, coluna, orientacao, tamanho)
@@ -116,7 +112,7 @@ def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
             oponente_info = '  '.join([info if str(info) in 'X-' else '0' for info in tabuleiro_oponente[linha]])
             texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
         return texto
-
+a = 0
 jogando = 1
 ataques = []
 navio = 'porta-aviões'
@@ -138,25 +134,26 @@ for i in range(4):
     tamanho = 1
     x = faz_perguntas(navio,tamanho)
     frota = preenche_frota(frota,navio,x[0],x[1],x[2],tamanho)
-    tabuleiro_oponente = posiciona_frota(frota_oponente)
-    tabuleiro_jogador = posiciona_frota(frota)
-    print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
-    while jogando == 1:
+tabuleiro_oponente = posiciona_frota(frota_oponente)
+tabuleiro_jogador = posiciona_frota(frota)
+while jogando == 1:
+    linha_atk = (input('Qual linha deseja atacar? '))
+    while linha_atk == '' or int(linha_atk) < 0 or int(linha_atk) > 9:
+        print('Linha inválida!')
         linha_atk = (input('Qual linha deseja atacar? '))
-        while linha_atk == '' or int(linha_atk) < 0 or int(linha_atk) > 9:
-            print('Linha inválida!')
-            linha_atk = (input('Qual linha deseja atacar? '))
-        coluna_atk = (input('Qual coluna deseja atacar? '))
-        while coluna_atk == '' or int(coluna_atk) < 0 or int(coluna_atk) > 9:
-            print('Coluna inválida!')
-            coluna_atk = (input('Qual coluna deseja atacar? '))
-        linha_atk = int(linha_atk)
-        coluna_atk = int(coluna_atk)
-        if [linha_atk,coluna_atk] in ataques:
-            print('A posição linha {0} e coluna {1} já foi informada anteriormente!'.format(linha_atk, coluna_atk))
-        else:
-            ataques.append([linha_atk,coluna_atk])
-            tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha_atk, coluna_atk)
-            if afundados(frota_oponente, tabuleiro_oponente) == 20:
-                print('Parabéns! Você derrubou todos os navios do seu oponente!')
-                jogando = 0
+    coluna_atk = (input('Qual coluna deseja atacar? '))
+    while coluna_atk == '' or int(coluna_atk) < 0 or int(coluna_atk) > 9:
+        print('Coluna inválida!')
+        coluna_atk = (input('Qual coluna deseja atacar? '))        
+    linha_atk = int(linha_atk)
+    coluna_atk = int(coluna_atk)
+    if [linha_atk,coluna_atk] in ataques:
+        print('A posição linha {0} e coluna {1} já foi informada anteriormente!'.format(linha_atk, coluna_atk))
+    else:
+        ataques.append([linha_atk,coluna_atk])
+        tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha_atk, coluna_atk)
+        print(afundados(frota_oponente, tabuleiro_oponente))
+        print(ataques)
+        if afundados(frota_oponente, tabuleiro_oponente) == 20:
+            print('Parabéns! Você derrubou todos os navios do seu oponente!')
+            jogando = 0

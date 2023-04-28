@@ -19,28 +19,24 @@ frota = {
     ],
 }
 tabuleiro = [
-  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0, 'X', 'X', 'X', 'X', 0],
-  [0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 1, 0, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-  [0, 1, 1, 1, 0, 0, 0, 1, 0, 0],
+  [0, 0, 0, 'X', 0, 0, 0, 0, 0, 0],
+  [0, 'X', 0, 0, 0, 'X', 'X', 'X', 'X', 0],
+  [0, 'X', 0, 'X', 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 'X', 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 'X', 0, 'X', 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 'X', 0, 0],
+  [0, 'X', 'X', 'X', 0, 0, 0, 'X', 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-  [0, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+  [0, 0, 0, 0, 'X', 0, 0, 0, 0, 'X'],
+  [0, 'X', 'X', 0, 0, 0, 0, 0, 0, 0]
 ]
 def afundados(frota, tabuleiro):
     total_afundados = 0
     for navio, posições_gerais in frota.items():
         for posição_umbarco in posições_gerais: 
-            afundado = True
             for posição in posição_umbarco:
-                if tabuleiro[posição[0]][posição[1]] != 'X':
-                    afundado = False
-                    break
-            if afundado:
-                total_afundados += 1
+                if tabuleiro[posição[0]][posição[1]] == 'X':
+                  total_afundados += 1
     return total_afundados
 
 resultado = afundados(frota, tabuleiro)
