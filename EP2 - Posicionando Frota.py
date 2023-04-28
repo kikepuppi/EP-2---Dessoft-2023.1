@@ -59,7 +59,6 @@ def faz_perguntas(navio, tamanho):
             a = 1 
     return [linha,coluna,orientacao]
 
-
 navio = 'porta-aviões'
 tamanho = 4
 x = faz_perguntas(navio,tamanho)
