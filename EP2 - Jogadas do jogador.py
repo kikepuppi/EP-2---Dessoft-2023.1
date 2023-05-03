@@ -152,9 +152,18 @@ while jogando == 1:
         coluna_atk = (input('Qual coluna deseja atacar? '))        
     linha_atk = int(linha_atk)
     coluna_atk = int(coluna_atk)
-    if [linha_atk,coluna_atk] in ataques:
+    while [linha_atk,coluna_atk] in ataques:
         print('A posição linha {0} e coluna {1} já foi informada anteriormente!'.format(linha_atk, coluna_atk))
-    else:
-        ataques.append([linha_atk,coluna_atk])
-        tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha_atk, coluna_atk)
+        linha_atk = (input('Qual linha deseja atacar? '))
+        while linha_atk == '' or int(linha_atk) < 0 or int(linha_atk) > 9:
+            print('Linha inválida!')
+            linha_atk = (input('Qual linha deseja atacar? '))
+        coluna_atk = (input('Qual coluna deseja atacar? '))
+        while coluna_atk == '' or int(coluna_atk) < 0 or int(coluna_atk) > 9:
+            print('Coluna inválida!')
+            coluna_atk = (input('Qual coluna deseja atacar? '))        
+        linha_atk = int(linha_atk)
+        coluna_atk = int(coluna_atk)       
+    ataques.append([linha_atk,coluna_atk])
+    tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha_atk, coluna_atk)
 
