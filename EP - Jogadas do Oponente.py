@@ -1,3 +1,6 @@
+# EP - Jogadas do Oponente
+import random as rd
+
 # EP2 - Jogadas do jogador
 frota = {
     "porta-aviões":[],
@@ -115,6 +118,7 @@ def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
 a = 0
 jogando = 1
 ataques = []
+ataques_oponente = []
 navio = 'porta-aviões'
 tamanho = 4
 x = faz_perguntas(navio,tamanho)
@@ -137,11 +141,25 @@ for i in range(4):
 tabuleiro_oponente = posiciona_frota(frota_oponente)
 tabuleiro_jogador = posiciona_frota(frota)
 while jogando == 1:
+    if afundados(frota, tabuleiro_jogador) == 20:
+            print('Xi! O oponente derrubou toda a sua frota =(')
+            jogando = 0
+            continue
     if afundados(frota_oponente, tabuleiro_oponente) == 20:
             print('Parabéns! Você derrubou todos os navios do seu oponente!')
             jogando = 0
             continue
     print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
+    linha_atk_oponente = rd.randint(0,9)
+    coluna_atk_oponente = rd.randint(0,9)
+    atk_o = [linha_atk_oponente, coluna_atk_oponente]
+    while atk_o in ataques_oponente:
+        linha_atk_oponente = rd.randint(0,9)
+        coluna_atk_oponente = rd.randint(0,9)
+        atk_o = [linha_atk_oponente, coluna_atk_oponente] 
+    ataques_oponente.append(atk_o)
+    print('Seu oponente está atacando na linha {0} e coluna {1}'.format(linha_atk_oponente, coluna_atk_oponente))
+    tabuleiro_jogador = faz_jogada(tabuleiro_jogador,linha_atk_oponente,coluna_atk_oponente)
     linha_atk = (input('Qual linha deseja atacar? '))
     while linha_atk == '' or int(linha_atk) < 0 or int(linha_atk) > 9:
         print('Linha inválida!')
@@ -152,9 +170,18 @@ while jogando == 1:
         coluna_atk = (input('Qual coluna deseja atacar? '))        
     linha_atk = int(linha_atk)
     coluna_atk = int(coluna_atk)
-    if [linha_atk,coluna_atk] in ataques:
+    while [linha_atk,coluna_atk] in ataques:
         print('A posição linha {0} e coluna {1} já foi informada anteriormente!'.format(linha_atk, coluna_atk))
-    else:
-        ataques.append([linha_atk,coluna_atk])
-        tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha_atk, coluna_atk)
+        linha_atk = (input('Qual linha deseja atacar? '))
+        while linha_atk == '' or int(linha_atk) < 0 or int(linha_atk) > 9:
+            print('Linha inválida!')
+            linha_atk = (input('Qual linha deseja atacar? '))
+        coluna_atk = (input('Qual coluna deseja atacar? '))
+        while coluna_atk == '' or int(coluna_atk) < 0 or int(coluna_atk) > 9:
+            print('Coluna inválida!')
+            coluna_atk = (input('Qual coluna deseja atacar? '))        
+        linha_atk = int(linha_atk)
+        coluna_atk = int(coluna_atk)
+    ataques.append([linha_atk,coluna_atk])
+    tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha_atk, coluna_atk)
 
