@@ -1,6 +1,6 @@
 # EP - Jogadas do Oponente
 import random as rd
-
+rd.seed(2)
 # EP2 - Jogadas do jogador
 frota = {
     "porta-aviões":[],
